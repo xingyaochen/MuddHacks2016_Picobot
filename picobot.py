@@ -2,7 +2,6 @@ import RPi.GPOI as io
 import time
 import sys, tty, termios
 
-debug=True
 io.setmode(io.BOARD)
 io.setwarnings(Faslse)
 """io.setup(11, io.OUT)  #left forward
@@ -16,7 +15,7 @@ io.setup(5, io.IN, pull_up_down=io.PUD_UP) #IR left
 """
 
 
-def setMotors(left1, left2, right1, right2):
+def setMotors(left1, left2, right1, right2, debug=True):
     """define GPIO pins that correspont to the motor controls, takes ints"""
     io.setup(left1, io.OUT)  #left forward
     io.setup(left2, io.OUT)    #left reverse
@@ -27,7 +26,7 @@ def setMotors(left1, left2, right1, right2):
         print("rights:" [right1, right2])
     return [left1, left2, right1, right2]
 
-def setIR(front, back, left, right):
+def setIR(front, back, left, right, debug=True):
     io.setup(front, io.IN, pull_up_down=io.PUD_UP) #IR front
     io.setup(back, io.IN, pull_up_down=io.PUD_UP) #IR back
     io.setup(left, io.IN, pull_up_down=io.PUD_UP) #IR left
@@ -38,7 +37,7 @@ def setIR(front, back, left, right):
 
 
 
-def forward(num, motors):
+def forward(num, motors, debug=True):
     """takes in an int for time, and a list of len 4 for motors"""
     if debug:
         print("forward")
@@ -48,7 +47,7 @@ def forward(num, motors):
     io.output(motors[3],0) #dont move right2 motor
     time.sleep(num)
 
-def back(num):
+def back(num, debug=True):
     """takes in an int for time, and a list of len 4 for motors"""
     if debug:
         print("backward")
@@ -58,7 +57,7 @@ def back(num):
     io.output(motors[3],1) #move right2 motor
     time.sleep(num)
 
-def right(num, motors):
+def right(num, motors, debug=True):
     """takes in an int for time, and a list of len 4 for motors"""
     if debug:
         print("turn right")
@@ -68,7 +67,7 @@ def right(num, motors):
     io.output(motors[3],1) #move right2 motor
     time.sleep(num)
 
-def left(num):
+def left(num, debug=True):
     """takes in an int for time, and a list of len 4 for motors"""
     if debug:
         print("turn left")
@@ -78,7 +77,7 @@ def left(num):
     io.output(motors[3] ,0) #stop right2 motor
     time.sleep(num)
 
-def stop():
+def stop(debug=True):
     """takes in an int for time, and a list of len 4 for motors"""
     if debug:
         print("stop")
@@ -98,7 +97,7 @@ def getch():
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
     return ch
 
-def manualSteer():
+def manualSteer(debug=True):
     """run this to steer PicoBot using keyboard, press 'w', 'a', 's', 'z'. """
     while True:
         char=getch()
@@ -120,4 +119,4 @@ def manualSteer():
 
 def autoSteer(IRSensors):
     """takes a list of length 4 of IR sensor pins"""
-    return 
+    return
