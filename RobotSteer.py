@@ -161,9 +161,4 @@ def manualSteer(debug=True):
             if debug:
                 print("TERMINATE")
 """
-def autoSteer():
-    #IR detect: if 1, something in front of it and is a tuple.
-    while IRDetect()[3] == 1:
-        back(0.01)
-    while IRDetect()[2] == 1:
-        forward(0.01)
+io.cleanup()

@@ -1,0 +1,10 @@
+mport RobotSteer
+
+#from navigation import navigationServer
+
+test = NavigationPoller()
+test.start()
+print("hi!")
+#while True:
+#	tuple = test.get_current_info()
+#	print(tuple)
