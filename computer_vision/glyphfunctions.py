@@ -82,40 +82,48 @@ def get_topdown_quad(image, src):
 #     return image
 
 def get_glyph_pattern(image, black_threshold, white_threshold):
-
     # collect pixel from each cell (left to right, top to bottom)
-    cells = []
+    img = cv2.resize(image,(5,5))[1:-1,1:-1]
+    img = (img > np.mean(img)) * 1
+    res = list(img.reshape(9))
+    # print(res)
+    return res
+    # black_threshold = np.mean(image)
+    # white_threshold = np.mean(image)
+    # cells = []
 
-    cell_half_width = int(round(image.shape[1] / 10.0))
-    cell_half_height = int(round(image.shape[0] / 10.0))
+    # cell_half_width = int(round(image.shape[1] / 10.0))
+    # cell_half_height = int(round(image.shape[0] / 10.0))
 
-    row1 = cell_half_height*3
-    row2 = cell_half_height*5
-    row3 = cell_half_height*7
-    col1 = cell_half_width*3
-    col2 = cell_half_width*5
-    col3 = cell_half_width*7
+    # row1 = cell_half_height*3
+    # row2 = cell_half_height*5
+    # row3 = cell_half_height*7
+    # col1 = cell_half_width*3
+    # col2 = cell_half_width*5
+    # col3 = cell_half_width*7
 
-    cells.append(image[row1, col1])
-    cells.append(image[row1, col2])
-    cells.append(image[row1, col3])
-    cells.append(image[row2, col1])
-    cells.append(image[row2, col2])
-    cells.append(image[row2, col3])
-    cells.append(image[row3, col1])
-    cells.append(image[row3, col2])
-    cells.append(image[row3, col3])
+    # cells.append(image[row1, col1])
+    # cells.append(image[row1, col2])
+    # cells.append(image[row1, col3])
+    # cells.append(image[row2, col1])
+    # cells.append(image[row2, col2])
+    # cells.append(image[row2, col3])
+    # cells.append(image[row3, col1])
+    # cells.append(image[row3, col2])
+    # cells.append(image[row3, col3])
 
-    # threshold pixels to either black or white
-    for idx, val in enumerate(cells):
-        if val < black_threshold:
-            cells[idx] = 0
-        elif val > white_threshold:
-            cells[idx] = 1
-        else:
-            return None
+    # # threshold pixels to either black or white
+    # for idx, val in enumerate(cells):
+    #     if val < black_threshold:
+    #         cells[idx] = 0
+    #     else:
+    #         cells[idx] = 1
+    #     # elif val > white_threshold:
+    #     #     cells[idx] = 1
+    #     # else:
+    #     #     return None
 
-    return cells
+    # return cells
 
 def resize_image(image, new_size):
     ratio = new_size / image.shape[1]
