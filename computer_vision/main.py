@@ -10,7 +10,7 @@ webcam.start()
 
 QUADRILATERAL_POINTS = 4
 SHAPE_RESIZE = 100.0
-BLACK_THRESHOLD = 190
+BLACK_THRESHOLD = 245
 WHITE_THRESHOLD = 230
 
 framenum = 0
@@ -75,7 +75,7 @@ while True:
                 dtr = sorted(dc , key=lambda x:x[0]*x[1])[-1]
                 theta_q1 = math.atan(dtr[0]/dtr[1])/2/math.pi * 360 + (360 - 45)
                 theta = (theta_q1 + 90 * glyph_rotation) % 360
-                navigationClient.socket_send_info(x, y, theta)
+                navigationClient.socket_send_info(framenum, x, y, theta)
                 print("\r%6d   %4.4f %4.4f %4.4f ========================="%(framenum, x,y, theta), end="\n")
             else:
                 if not glyph_found:
