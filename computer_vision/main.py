@@ -2,6 +2,7 @@ import cv2
 from glyphdatabase import *
 from glyphfunctions import *
 from webcam import Webcam
+import navigationClient
 import math
 
 webcam = Webcam()
@@ -74,6 +75,7 @@ while True:
                 dtr = sorted(dc , key=lambda x:x[0]*x[1])[-1]
                 theta_q1 = math.atan(dtr[0]/dtr[1])/2/math.pi * 360 + (360 - 45)
                 theta = (theta_q1 + 90 * glyph_rotation) % 360
+                navigationClient.socket_send_info(x, y, theta)
                 print("\r%6d   %4.4f %4.4f %4.4f ========================="%(framenum, x,y, theta), end="\n")
             else:
                 if not glyph_found:

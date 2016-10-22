@@ -3,7 +3,7 @@ from threading import Thread
 import time
 
 class NavigationPoller(object):
-    HOST = '127.0.0.1'
+    HOST = '0.0.0.0'
     PORT = 8800
     def __init__(self):
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
