@@ -161,7 +161,9 @@ def manualSteer(debug=True):
             if debug:
                 print("TERMINATE")
 """
-manualSteer()
-def autoSteer(IRSensors):
-    """takes a list of length 4 of IR sensor pins"""
-    return
+def autoSteer():
+    #IR detect: if 1, something in front of it and is a tuple.
+    while IRDetect()[3] == 1:
+        back(0.01)
+    while IRDetect()[2] == 1:
+        forward(0.01)
