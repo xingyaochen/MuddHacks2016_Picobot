@@ -1,4 +1,4 @@
-import RPi.GPOI as io
+import RPi.GPIO as io
 import time
 import sys, tty, termios
 

@@ -1,4 +1,4 @@
-import RPi.GPOI as io
+import RPi.GPIO as io
 import time
 import sys, tty, termios
 
@@ -6,9 +6,9 @@ io.setmode(io.BOARD)
 io.setwarnings(False)
 
 
-"""io.setup(11, io.OUT)  #left forward
-io.setup(13, io.OUT)    #left reverse
-io.setup(12, io.OUT)    #right forward
+io.setup(18, io.OUT)  #left forward
+io.setup(22, io.OUT)    #left reverse
+io.setup(15, io.OUT)    #right forward
 io.setup(16, io.OUT)    #right reverse"""
 """io.setup(15, io.IN, pull_up_down=io.PUD_UP) #IR front
 io.setup(7, io.IN, pull_up_down=io.PUD_UP) #IR back
@@ -30,7 +30,7 @@ def setMotors(left1, left2, right1, right2, debug=True):
 
 motors=[18, 22, 16, 15]
 
-def forward(num, motors, debug=True):
+def forward(num, debug=True):
     """takes in an int for time, and a list of len 4 for motors"""
     if debug:
         print("forward")
@@ -50,7 +50,7 @@ def back(num, debug=True):
     io.output(motors[3],1) #move right2 motor
     time.sleep(num)
 
-def right(num, motors, debug=True):
+def right(num,debug=True):
     """takes in an int for time, and a list of len 4 for motors"""
     if debug:
         print("turn right")
@@ -98,9 +98,9 @@ def manualSteer(debug=True):
             print(char)
         if(char=="w"):
             forward(0.05)
-        if(char=="a"):
-            right(0.05)
         if(char=="s"):
+            right(0.05)
+        if(char=="a"):
             left(0.05)
         if(char=="z"):
             back(0.05)
@@ -139,9 +139,8 @@ def getch():
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
     return ch
 
-
+"""
 def manualSteer(debug=True):
-    """run this to steer PicoBot using keyboard, press 'w', 'a', 's', 'z'. """
     LEFT_TRIM   = 0
     RIGHT_TRIM  = 0
     robot = Robot.Robot(left_trim=LEFT_TRIM, right_trim=RIGHT_TRIM)
@@ -161,8 +160,8 @@ def manualSteer(debug=True):
             robot.stop()
             if debug:
                 print("TERMINATE")
-            break
-
+"""
+manualSteer()
 def autoSteer(IRSensors):
     """takes a list of length 4 of IR sensor pins"""
     return
