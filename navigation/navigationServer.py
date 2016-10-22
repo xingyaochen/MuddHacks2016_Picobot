@@ -11,6 +11,7 @@ class NavigationPoller(object):
         self.s.bind((self.HOST, self.PORT))
         self.s.listen(1)
         self.conn, self.addr = self.s.accept()
+        self.fnum = -1
         self.x = -1
         self.y = -1
         self.theta = -1
@@ -24,11 +25,11 @@ class NavigationPoller(object):
             data = self.conn.recv(1024)
             if not data: break
             data = data.decode("UTF-8")
-            self.x, self.y, self.theta = tuple(map(float, data.split(" ")))
+            self.fnum, self.x, self.y, self.theta = tuple(map(float, data.split(" ")))
 
     # get the current frame
     def get_current_info(self):
-        return (self.x, self.y, self.theta)
+        return (self.fnum, self.x, self.y, self.theta)
 
 if __name__ == "__main__":
     test = NavigationPoller()
