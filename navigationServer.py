@@ -66,12 +66,20 @@ if __name__ == "__main__":
         data = data.decode("UTF-8")
         print(data)
         #try:
-        fnum, x, y, theta = tuple(map(float, data.split(":")))
+        try:
+            fnum, x, y, theta = tuple(map(float, data.split(":")))
+        except: continue
         print(theta)
+        # RobotSteer.right(0.001)
         if theta > 180:
             RobotSteer.right(0.001)
         else:
             RobotSteer.left(0.001)
-        # time.sleep(0)
+        time.sleep(0.01)
+        RobotSteer.stop()
+        if abs(180 - theta) < 30:
+            time.sleep(0.02)
+        else:
+            time.sleep(0.01)
 
         #except: break
