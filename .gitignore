@@ -2,3 +2,4 @@ __PYCACHE__
 *.pyc
 *.pyd
 *.swp
+*.DS_Store
